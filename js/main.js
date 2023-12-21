@@ -171,7 +171,7 @@ function updateData() {
 var searchInput = document.getElementById("search_input");
 function searchBookmarks() {
   // variable carry the value of search input
-  var term = searchInput.value;
+  var term = searchInput.value.toLowerCase();
   var tableRow = "";
   for (var i = 0; i < bookmarkList.length; i++) {
     if (bookmarkList[i].bookName.toLowerCase().includes(term.toLowerCase())) {
@@ -210,7 +210,6 @@ function searchBookmarks() {
   }
 
   document.getElementById("tableBody").innerHTML = tableRow;
-  
 }
 
 // ^================================================================= search =====================================================================
