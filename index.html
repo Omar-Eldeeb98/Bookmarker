@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookmarker</title>
+    <link
+      rel="shortcut icon"
+      href="./assets/images/bookmark_6595599.png"
+      type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet" />
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="./css/all.min.css" />
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <!-- main stylesheet -->
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <section id="bookmarker" class="">
+      <div class="fixed_item">
+        <p><span>By</span></p>
+        <p><span>O</span></p>
+        <p><span>E</span></p>
+        <p><span>5</span></p>
+        <p><span>7</span></p>
+      </div>
+      <div class="layer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-5">
+              <div id="left_section" class="left_section rounded-top-3 p-3">
+                <h1
+                  class="mb-4 d-flex align-items-center justify-content-between">
+                  <div class="layer_"></div>
+                  <span class="me-3">Bookmarker</span>
+                  <i class="fa-solid fa-bookmark fa-beat-fade"></i>
+                </h1>
+
+                <hr class="mb-3" />
+                <p class="mb-5">
+                  <i class="fa-solid fa-bookmark me-2"></i>
+                  <span> Bookmark your favorite sites</span>
+                  <i class="fa-solid fa-bookmark ms-2"></i>
+                </p>
+
+                <label for="bookmarkName" class="form-label text-white">
+                  <i class="fa-solid fa-book-bookmark me-2"></i> Site
+                  Name:</label
+                >
+                <input
+                  oninput="bookmarkNameValidation()"
+                  type="text"
+                  name="site name"
+                  id="bookmarkName"
+                  placeholder="ex: google , facebook "
+                  class="form-control mb-4 p-2" />
+                <p
+                  class="d-none alert alert-danger text-black text-start d-flex justify-content-between"
+                  id="nameAlert">
+                  Invalid Bookmark Name
+                  <i
+                    class="fa-solid fa-xmark-circle text-danger fs-4 fw-bold"></i>
+                </p>
+
+                <label for="bookmarkUrl" class="form-label text-white">
+                  <i class="fa-solid fa-link me-2"></i> Site URL:</label
+                >
+                <input
+                  oninput="bookmarkUrlValidation()"
+                  type="text"
+                  name="site url"
+                  id="bookmarkUrl"
+                  placeholder="ex: www.google.com OR google.com"
+                  class="form-control mb-4 p-2" />
+                <p
+                  class="d-none alert alert-danger text-black text-start d-flex justify-content-between"
+                  id="urlAlert">
+                  Invalid Bookmark URL
+                  <i
+                    class="fa-solid fa-xmark-circle text-danger fs-4 fw-bold"></i>
+                </p>
+
+                <div class="row">
+                  <div class="col-md-5">
+                    <button
+                      onclick="addBookmark()"
+                      id="submit_button"
+                      class="btn btn-primary w-100 p-2 mb-2">
+                      Add
+                      <i class="fa-solid fa-bookmark ms-2"></i>
+                    </button>
+                    <button
+                      onclick="updateData()"
+                      id="update_button"
+                      class="btn btn-outline-warning w-100 p-2 mb-2 d-none">
+                      Update
+                      <i class="fa-solid fa-pen-to-square fa-bounce ms-2"></i>
+                    </button>
+                  </div>
+
+                  <div class="col-md-7">
+                    <button
+                      onclick="deleteAllBookmarks()"
+                      id="delete_all_button"
+                      class="btn btn-outline-danger w-100 p-2 mb-2">
+                      Delete All
+                      <i class="fa-solid fa-trash ms-2"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="right_section_ col-md-7">
+              <div
+                id="right_section"
+                class="right_section rounded-bottom-2 p-3">
+                <input
+                  oninput="searchBookmarks()"
+                  id="search_input"
+                  type="text"
+                  name="search input"
+                  class="form-control w-75 mx-auto mb-3 mt-2"
+                  placeholder="Search By Name:" />
+
+                <hr />
+                <table
+                  class="table table-dark table-bordered table-hover text-center">
+                  <thead id="table_header" class="text-uppercase table-active">
+                    <tr>
+                      <th>#</th>
+                      <th>Site Name</th>
+                      <th>Visit</th>
+                      <th>Update</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tableBody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="model_container col-md-6">
+              <div id="errorModal" class="error_model rounded-top-3 p-3 d-none">
+                <div
+                  class="model_header d-flex justify-content-between align-items-center">
+                  <h5 class="header5 modal-title" id="modalTitleId">
+                    <span class="span1 rounded-circle me-1"></span>
+                    <span class="span2 rounded-circle me-1"></span>
+                    <span class="span3 rounded-circle"></span>
+                  </h5>
+                  <button class="btn" id="close_btn" onclick="closeModel()">
+                    <i class="fa-solid fa-xmark text-white"></i>
+                  </button>
+                </div>
+
+                <hr />
+
+                <div class="model_body">
+                  <h5 class="mb-4">
+                    Site Name or Url is not valid, Please follow the rules below
+                    :
+                  </h5>
+                  <p class="lead">
+                    <i
+                      class="fa-solid fa-circle-right fa-fade text-danger me-2"></i>
+                    Site name must contain at least 3 characters & must start
+                    with small char
+                  </p>
+                  <p class="lead">
+                    <i
+                      class="fa-solid fa-circle-right fa-fade text-danger me-2"></i>
+                    Site URL must be a valid one
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- bootstrap js -->
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <!-- main js  -->
+    <script src="./js/main.js"></script>
+  </body>
+</html>
